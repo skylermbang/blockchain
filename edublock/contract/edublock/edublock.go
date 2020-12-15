@@ -51,6 +51,7 @@ func (s *SmartContract) addUser(APIstub shim.ChaincodeStubInterface, args []stri
 	}
 	var user = UserCerti{Id: args[0], Name: args[1], Status: "studying"}
 	userAsBytes, _ := json.Marshal(user)
+	
 	APIstub.PutState(args[0], userAsBytes)
 
 	return shim.Success(nil)
@@ -86,7 +87,8 @@ func (s *SmartContract) addCerti(APIstub shim.ChaincodeStubInterface, args []str
 	} else {
 		shim.Error("not supported update type")
 	}
-
+	
+	//UserCerti.Status = "graduated"
 	userAsBytes, err = json.Marshal(user)
 
 	APIstub.PutState(args[0], userAsBytes)
